@@ -43,11 +43,11 @@ function App() {
   const RAW_SAVE_SIZE = SECTOR_SIZE * 32;
   const SAVE_SIGNATURE = 0x08012025;
 
-  const SECTOR_ID_SAVEBLOCK2 = 0;
-  const SECTOR_ID_SAVEBLOCK1_START = 1;
-  const SECTOR_ID_SAVEBLOCK1_END = 4;
-  const SECTOR_ID_PKMN_STORAGE_START = 5;
-  const SECTOR_ID_PKMN_STORAGE_END = 13;
+  //const SECTOR_ID_SAVEBLOCK2 = 0;
+  //const SECTOR_ID_SAVEBLOCK1_START = 1;
+  //const SECTOR_ID_SAVEBLOCK1_END = 4;
+  //const SECTOR_ID_PKMN_STORAGE_START = 5;
+  //const SECTOR_ID_PKMN_STORAGE_END = 13;
 
   const OLD_LAYOUT = {
     saveBlock1Size: 15816,
@@ -167,8 +167,8 @@ function App() {
       const fileBytes = new Uint8Array(await selectedFile.bytes());
 
       //Process save/////////////////////////////////////////////
-      const OLD_SPECIES_NUM = 412;
-      const NEW_SPECIES_TO_ADD = 35;
+      //const OLD_SPECIES_NUM = 412;
+      //const NEW_SPECIES_TO_ADD = 35;
 
       const rawSaveOffset = detectRawSaveOffset(fileBytes);
       const bytes = fileBytes.slice(rawSaveOffset, rawSaveOffset + RAW_SAVE_SIZE);
@@ -541,11 +541,11 @@ function App() {
     return extractBlock(slot, 1, 4);
   }
 
-  function extractPokemonStorage(slot: Slot) {
-    return extractBlock(slot, 5, 13);
-  }
+  //function extractPokemonStorage(slot: Slot) {
+  //  return extractBlock(slot, 5, 13);
+  //}
 
-  function readLayoutFromRom(romBytes: Uint8Array<ArrayBuffer>) {
+  /*function readLayoutFromRom(romBytes: Uint8Array<ArrayBuffer>) {
     const magic = [0x59, 0x41, 0x4C, 0x53]; // 0x534C4159 little endian
 
     for (let i = 0; i <= romBytes.length - 4; i += 4) {
@@ -574,7 +574,7 @@ function App() {
 
     addLog("ERROR!!! Save layout table not found in ROM.");
     throw new Error("Save layout table not found in ROM.");
-  }
+  }*/
 
   function copyExpandedArray({
     oldBlock,
@@ -582,14 +582,14 @@ function App() {
     oldOffset,
     oldLength,
     newOffset,
-    newLength,
+    //newLength,
   }: {
     oldBlock: Uint8Array<ArrayBuffer>,
     newBlock: Uint8Array<ArrayBuffer>,
     oldOffset: number,
     oldLength: number,
     newOffset: number,
-    newLength: number,
+    //newLength: number,
   }) {
     newBlock.set(
       oldBlock.slice(oldOffset, oldOffset + oldLength),
@@ -733,7 +733,7 @@ function App() {
       oldOffset: oldOwnedOffset,
       oldLength: oldOwnedLength,
       newOffset: newOwnedOffset,
-      newLength: newOwnedLength,
+      //newLength: newOwnedLength,
     });
 
     // Between owned[] and seen[]
@@ -749,7 +749,7 @@ function App() {
       oldOffset: oldSeenOffset,
       oldLength: oldSeenLength,
       newOffset: newSeenOffset,
-      newLength: newSeenLength,
+      //newLength: newSeenLength,
     });
 
     // After seen[]
@@ -789,7 +789,7 @@ function App() {
           oldOffset: oldSeen1Offset,
           oldLength: oldSeenLength,
           newOffset: newSeen1Offset,
-          newLength: newSeenLength,
+          //newLength: newSeenLength,
       });
 
       //copy range between seen1 and seen2
@@ -801,7 +801,7 @@ function App() {
           oldOffset: oldSeen2Offset,
           oldLength: oldSeenLength,
           newOffset: newSeen2Offset,
-          newLength: newSeenLength,
+          //newLength: newSeenLength,
       });
 
       //copy range between seen2 and dexNavSearchLevels
@@ -814,7 +814,7 @@ function App() {
           oldOffset: oldDexNavSearchLevelsOffset,
           oldLength: oldDexNavLength,
           newOffset: newDexNavSearchLevelsOffset,
-          newLength: newDexNavLength,
+          //newLength: newDexNavLength,
       });
 
       //copy range after dexNavSearchLevels, including dexNavChain
